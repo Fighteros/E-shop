@@ -12,7 +12,7 @@ app.use(express.json());
 // middlewares
 if (NODE_ENV === 'development') {
     app.use(morgan('dev'));
-    console.log(`mode ${NODE_ENV}`);
+    console.log(`mode: ${NODE_ENV}`);
 }
 
 // Connection to db

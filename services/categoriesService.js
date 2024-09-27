@@ -1,5 +1,7 @@
 const Category = require('../models/Category');
 const ApiError = require('../utils/ApiError');
+
+// makes any text space to - and make all letters lowercase
 const slugify = require('slugify');
 
 
@@ -58,6 +60,56 @@ exports.createCategory = asyncHandler(async (req, res, next) => {
         slug: slugify(req.body.name)
     });
     res.status(201).json({ data: category });
+});
+
+
+// @desc Update specific category
+// @route PUT /api/v1/categories/:id
+// @access Private
+
+exports.updateCategory = asyncHandler(async (req, res, next) => {
+    const { id } = req.params;
+    const { name } = req.body;
+
+    if (!name) {
+        return next(new ApiError('Name can\'t be empty!', 422));
+    }
+
+    const category = await Category.findOneAndUpdate(
+        { _id: id },
+        {
+            name: name,
+            slug: slugify(name)
+        },
+        // To return the object after updated!
+        { new: true }
+    );
+
+    if (!category) {
+        return next(
+            new ApiError(`There\'s no category for this id ${id}`, 404)
+        )
+    }
+
+    res.status(200).json({ data: category });
+});
+
+
+// @desc Delete specific category
+// @route DELETE /api/v1/categories/:id
+// @access Private
+
+exports.deleteCategory = asyncHandler(async (req, res, next) => {
+    const { id } = req.params;
+    const category = await Category.findByIdAndDelete(id);
+
+    if (!category) {
+        return next(
+            new ApiError(`There\'s no category for this id ${id}`, 404)
+        )
+    }
+
+    res.status(204).send();
 });
 
 

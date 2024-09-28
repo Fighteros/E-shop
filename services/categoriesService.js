@@ -71,10 +71,6 @@ exports.updateCategory = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
     const { name } = req.body;
 
-    if (!name) {
-        return next(new ApiError('Name can\'t be empty!', 422));
-    }
-
     const category = await Category.findOneAndUpdate(
         { _id: id },
         {

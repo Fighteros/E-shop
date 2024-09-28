@@ -3,7 +3,8 @@ const { PORT, NODE_ENV } = require('./config/config');
 const morgan = require('morgan');
 const conn = require('./config/mongoose');
 const mountRoutes = require('./routes/mountRoutes');
-const customErrorHandle = require('./middlewares/customErrorHandle');
+const globalError = require('./middlewares/errorMiddleware');
+const ApiError = require('./utils/ApiError');
 
 // Express
 const app = express();
@@ -23,13 +24,16 @@ conn();
 // Routes
 mountRoutes(app);
 
-// handle errors 
-app.use(customErrorHandle);
 
-// Retunr not found to any not known path
-app.use('*', (req, res, next) => {
-    return res.status(404).json();
+// Handle global errors 
+app.use(globalError);
+
+// handle unhandled routes
+app.all('*', (req, res, next) => {
+    next(new ApiError('Can\'t find this path', 404))
 })
+
+
 // Server run 
 app.listen(PORT, () => {
     console.log(`The server is running on port ${PORT}`);

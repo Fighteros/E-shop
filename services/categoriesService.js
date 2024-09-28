@@ -34,7 +34,7 @@ exports.getCategories = asyncHandler(async (req, res, next) => {
 // @route GET /api/v1/categories/:id
 // @access Public
 
-exports.getCategory = asyncHandler(async (req, res) => {
+exports.getCategory = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
     const category = await Category.findById(id);
 
@@ -53,7 +53,7 @@ exports.getCategory = asyncHandler(async (req, res) => {
 // @desc Create category
 // @route POST /api/v1/categories
 // @access Private
-exports.createCategory = asyncHandler(async (req, res, next) => {
+exports.createCategory = asyncHandler(async (req, res) => {
     const name = req.body.name;
     const category = await Category.create({
         name: req.body.name,

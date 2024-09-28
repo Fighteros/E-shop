@@ -1,6 +1,6 @@
 const express = require('express');
 const { createCategory, getCategory, getCategories, updateCategory, deleteCategory } = require('../services/categoriesService');
-const { getCategoryValidator, createCategoryValidator } = require('../utils/validators/categoryValidators');
+const { getCategoryValidator, createCategoryValidator, deleteCategoryValidator, updateCategoryValidator, } = require('../utils/validators/categoryValidators');
 
 
 
@@ -16,8 +16,8 @@ router.route('/')
 
 router.route('/:id')
     .get(getCategoryValidator, getCategory)
-    .put(updateCategory)
-    .delete(deleteCategory);
+    .put(updateCategoryValidator, updateCategory)
+    .delete(deleteCategoryValidator, deleteCategory);
 
 
 module.exports = router;

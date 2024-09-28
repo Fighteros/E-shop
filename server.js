@@ -25,17 +25,29 @@ conn();
 mountRoutes(app);
 
 
-// Handle global errors 
-app.use(globalError);
 
 // handle unhandled routes
 app.all('*', (req, res, next) => {
     next(new ApiError('Can\'t find this path', 404))
-})
+});
+
+// Handle global errors 
+app.use(globalError);
 
 
 // Server run 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`The server is running on port ${PORT}`);
 })
 
+// Events => listen => callback(err)
+// Handle errors outside of express 
+
+process.on('unhandledRejection', (err) => {
+    console.log(`unhandledRejection Errors ${err.name} | ${err.message}`);
+    // Close server first then stop application   
+    server.close(() => {
+        console.log(`Shutting down ...`);
+        process.exit(1);
+    });
+})

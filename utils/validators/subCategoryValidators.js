@@ -20,3 +20,11 @@ exports.createSubCategoryValidator = [
     ,
     validatorMiddleware
 ]
+
+
+exports.getSubCategoryValidator = [
+    check('id')
+        .isMongoId()
+        .withMessage('Invalid SubCategory Id format'),
+    validatorMiddleware
+]

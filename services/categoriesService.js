@@ -1,13 +1,11 @@
-const Category = require('../models/Category');
-const ApiError = require('../utils/ApiError');
-
 // makes any text space to - and make all letters lowercase
 const slugify = require('slugify');
-
-
 // Passes errors to express error handlers out of box
 // For clean code async await syntax 
 const asyncHandler = require('express-async-handler');
+const Category = require('../models/Category');
+const ApiError = require('../utils/ApiError');
+
 
 
 // @desc Get list of categories 
@@ -40,7 +38,7 @@ exports.getCategory = asyncHandler(async (req, res, next) => {
 
     if (!category) {
         return next(
-            new ApiError(`There\'s no category for this id ${id}`, 404)
+            new ApiError(`There's no category for this id ${id}`, 404)
         )
     }
 
@@ -54,10 +52,10 @@ exports.getCategory = asyncHandler(async (req, res, next) => {
 // @route POST /api/v1/categories
 // @access Private
 exports.createCategory = asyncHandler(async (req, res) => {
-    const name = req.body.name;
+    const { name } = req.body;
     const category = await Category.create({
-        name: req.body.name,
-        slug: slugify(req.body.name)
+        name: name,
+        slug: slugify(name)
     });
     res.status(201).json({ data: category });
 });
@@ -83,7 +81,7 @@ exports.updateCategory = asyncHandler(async (req, res, next) => {
 
     if (!category) {
         return next(
-            new ApiError(`There\'s no category for this id ${id}`, 404)
+            new ApiError(`There's no category for this id ${id}`, 404)
         )
     }
 
@@ -101,7 +99,7 @@ exports.deleteCategory = asyncHandler(async (req, res, next) => {
 
     if (!category) {
         return next(
-            new ApiError(`There\'s no category for this id ${id}`, 404)
+            new ApiError(`There's no category for this id ${id}`, 404)
         )
     }
 

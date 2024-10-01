@@ -37,12 +37,6 @@ exports.updateSubCategoryValidator = [
         .isMongoId()
         .withMessage('Not a SubCategory valid id format '),
 
-    check('category')
-        .notEmpty()
-        .withMessage('SubCategory must have Category id')
-        .isMongoId()
-        .withMessage('Invalid Category id format')
-    ,
     validatorMiddleware
 ]
 

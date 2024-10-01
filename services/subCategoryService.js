@@ -53,6 +53,9 @@ exports.getSubCategory = asyncHandler(async (req, res, next) => {
 // @desc        Create SubCategory 
 // @route       POST /api/v1/subCategories
 // @access      Private
+
+// @Known bug is no logic to verify that category id belongs to a real category
+// so the user can add up any valid mongo id but does it matter when creating ?
 exports.createSubCategory = asyncHandler(async (req, res) => {
     const { name, category } = req.body;
     const subCategory = await SubCategory.create({
@@ -62,3 +65,54 @@ exports.createSubCategory = asyncHandler(async (req, res) => {
     });
     res.status(201).json({ data: subCategory })
 });
+
+
+
+// @desc        Update SubCategory 
+// @route       PUT /api/v1/subcategories/:id
+// @access      Private
+
+// @Known bug the same bug in create but does it matter when updating !?
+exports.updateSubCategory = asyncHandler(async (req, res, next) => {
+    const { id } = req.params;
+    const { name, category } = req.body;
+
+    const subCategory = await SubCategory.findByIdAndUpdate(id,
+        {
+            name,
+            slug: slugify(name),
+            category
+        },
+        { new: true }
+    );
+
+    if (!subCategory) {
+        return next(
+            new ApiError(`There's no subcategory for this id ${id}`, 404)
+        );
+    }
+
+    res.status(200).json({ data: subCategory });
+});
+
+
+
+
+// @desc        Delete SubCategory 
+// @route       Delete /api/v1/subcategories/:id
+// @access      Private
+
+exports.deleteSubCategory = asyncHandler(async (req, res, next) => {
+    const { id } = req.params;
+
+    const subCategory = await SubCategory.findByIdAndDelete(id);
+
+    if (!subCategory) {
+        return next(
+            new ApiError(`There's no subcategory for this id ${id}`, 404)
+        );
+    }
+
+    res.status(204).end();
+});
+

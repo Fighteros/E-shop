@@ -28,3 +28,30 @@ exports.getSubCategoryValidator = [
         .withMessage('Invalid SubCategory Id format'),
     validatorMiddleware
 ]
+
+
+exports.updateSubCategoryValidator = [
+    check('id')
+        .notEmpty()
+        .withMessage('SubCategory id can\'t be empty')
+        .isMongoId()
+        .withMessage('Not a SubCategory valid id format '),
+
+    check('category')
+        .notEmpty()
+        .withMessage('SubCategory must have Category id')
+        .isMongoId()
+        .withMessage('Invalid Category id format')
+    ,
+    validatorMiddleware
+]
+
+
+exports.deleteSubCategoryValidator = [
+    check('id')
+        .notEmpty()
+        .withMessage("SubCategory id can't be empty")
+        .isMongoId()
+        .withMessage('Not a SubCategory valid id format '),
+    validatorMiddleware
+]

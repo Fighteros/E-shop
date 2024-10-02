@@ -19,12 +19,7 @@ exports.getSubCategories = asyncHandler(async (req, res, next) => {
     const skip = (page - 1) * limit; // (2 - 1) * 5 = 5 skip first
     const subCategories = await SubCategory.find({})
         .skip(skip)
-        .limit(limit)
-        .populate({
-            path: "category",
-            // - param means to remove it from the select
-            select: 'name -_id'
-        });
+        .limit(limit);
 
     return res.status(200).json({
         results:
@@ -43,12 +38,7 @@ exports.getSubCategories = asyncHandler(async (req, res, next) => {
 
 exports.getSubCategory = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
-    const subCategory = await SubCategory.findById(id)
-        .populate({
-            path: "category",
-            // - param means to remove it from the select
-            select: 'name -_id'
-        });
+    const subCategory = await SubCategory.findById(id);
 
     if (!subCategory) {
         return next(

@@ -1,6 +1,20 @@
 const express = require('express');
-const { createSubCategory, getSubCategories, getSubCategory, updateSubCategory, deleteSubCategory } = require('../services/subCategoryService');
-const { createSubCategoryValidator, getSubCategoryValidator, updateSubCategoryValidator, deleteSubCategoryValidator } = require('../utils/validators/subCategoryValidators');
+const {
+    createSubCategory,
+    getSubCategories,
+    getSubCategory,
+    updateSubCategory,
+    deleteSubCategory,
+    setCategoryIdToBody,
+    createFilterObj
+} = require('../services/subCategoryService');
+
+const {
+    createSubCategoryValidator,
+    getSubCategoryValidator,
+    updateSubCategoryValidator,
+    deleteSubCategoryValidator
+} = require('../utils/validators/subCategoryValidators');
 
 
 // mergeParams: Allow access to params from other routers
@@ -14,8 +28,8 @@ router.route('/:id')
     .delete(deleteSubCategoryValidator, deleteSubCategory);
 
 router.route("/")
-    .get(getSubCategories)
-    .post(createSubCategoryValidator, createSubCategory);
+    .get(createFilterObj, getSubCategories)
+    .post(setCategoryIdToBody, createSubCategoryValidator, createSubCategory);
 
 
 module.exports = router

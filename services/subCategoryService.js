@@ -6,6 +6,23 @@ const SubCategory = require('../models/SubCategory');
 
 
 
+exports.setCategoryIdToBody = (req, res, next) => {
+    if (!req.body.category) req.body.category = req.params.categoryId;
+    next();
+};
+
+
+
+exports.createFilterObj = (req, res, next) => {
+    let filterObj = {};
+    // eslint-disable-next-line no-unused-expressions
+    req.params.categoryId ? filterObj = { category: req.params.categoryId } : filterObj;
+    req.filterObj = filterObj;
+
+    next();
+};
+
+
 // Nested route
 // @route GET /api/v1/categories/:categoryId/subcategories
 
@@ -20,11 +37,8 @@ exports.getSubCategories = asyncHandler(async (req, res, next) => {
     const limit = req.query.limit * 1 || 5;
     const skip = (page - 1) * limit; // (2 - 1) * 5 = 5 skip first
 
-    let filterObj = {};
 
-    if (req.params.categoryId) filterObj = { category: req.params.categoryId }
-    // filter data to categoryId
-    const subCategories = await SubCategory.find(filterObj)
+    const subCategories = await SubCategory.find(req.filterObj)
         .skip(skip)
         .limit(limit);
 
@@ -56,6 +70,8 @@ exports.getSubCategory = asyncHandler(async (req, res, next) => {
     res.status(200).json({ data: subCategory });
 
 });
+
+
 
 
 

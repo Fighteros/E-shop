@@ -3,7 +3,9 @@ const { createSubCategory, getSubCategories, getSubCategory, updateSubCategory, 
 const { createSubCategoryValidator, getSubCategoryValidator, updateSubCategoryValidator, deleteSubCategoryValidator } = require('../utils/validators/subCategoryValidators');
 
 
-const router = express.Router();
+// mergeParams: Allow access to params from other routers
+const router = express.Router({ mergeParams: true });
+
 
 
 router.route('/:id')

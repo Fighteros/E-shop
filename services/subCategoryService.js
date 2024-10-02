@@ -6,6 +6,8 @@ const SubCategory = require('../models/SubCategory');
 
 
 
+// Nested route
+// @route GET /api/v1/categories/:categoryId/subcategories
 
 
 
@@ -17,7 +19,12 @@ exports.getSubCategories = asyncHandler(async (req, res, next) => {
     const page = req.query.page * 1 || 1;
     const limit = req.query.limit * 1 || 5;
     const skip = (page - 1) * limit; // (2 - 1) * 5 = 5 skip first
-    const subCategories = await SubCategory.find({})
+
+    let filterObj = {};
+
+    if (req.params.categoryId) filterObj = { category: req.params.categoryId }
+    // filter data to categoryId
+    const subCategories = await SubCategory.find(filterObj)
         .skip(skip)
         .limit(limit);
 

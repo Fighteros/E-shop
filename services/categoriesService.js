@@ -20,9 +20,9 @@ exports.getCategories = asyncHandler(async (req, res, next) => {
     return res.status(200).json({
         data:
         {
-            totalCategories: categories.length,
+            total_categories: categories.length,
             page,
-            categories: categories
+            data: categories
         }
     });
 });

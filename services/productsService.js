@@ -17,7 +17,7 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
     const limit = req.query.limit * 1 || 5;
     const skip = (page - 1) * limit; // (2 - 1) * 5 = 5 skip first
 
-    const products = await Product.find({}).skip(skip).limit(limit);
+    const products = await Product.find({}).skip(skip).limit(limit).populate({ path: "category", select: "name -_id" });
     return res.status(200).json({
         data:
         {
@@ -35,7 +35,8 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
 
 exports.getProduct = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
-    const product = await Product.findById(id);
+    const product = await Product.findById(id)
+        .populate({ path: "category", select: "name -_id" });
 
     if (!product) {
         return next(
@@ -68,8 +69,10 @@ exports.createProduct = asyncHandler(async (req, res) => {
 
 exports.updateProduct = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
-    req.body.slug = req.body.title;
+    if (req.body.title) {
+        req.body.slug = slugify(req.body.title);
 
+    }
     const product = await Product.findOneAndUpdate(
         { _id: id },
         req.body,

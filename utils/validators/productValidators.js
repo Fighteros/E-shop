@@ -100,13 +100,26 @@ exports.createProductValidator = [
         .optional()
         .isMongoId()
         .withMessage('Invalid Subcategory id format')
+        // Validate that subcategories in body are valid and found in db
         .custom((subcategoriesIds) => SubCategory.find({ _id: { $exists: true, $in: subcategoriesIds } })
             .then((result) => {
                 // Length of subcategories equals length of Subcategories in body
-                if(result.length  < 1 || result.length !== subcategoriesIds.length) {
+                if (result.length < 1 || result.length !== subcategoriesIds.length) {
                     return Promise.reject(new Error('Invalid Subcategories ids'));
                 }
             }))
+        //Validate that subcategories belong to category
+        .custom((subcategoriesIds, { req }) => SubCategory.find({ category: req.body.category }).then((res) => {
+            const subcategoriesIdsInDB = [];
+            res.forEach(subCategory => subcategoriesIdsInDB.push(subCategory._id.toString()));
+            // Compare Subcategories ids from body to subcategories ids in db 
+            const checker = (target, arr) => target.every((v) => arr.includes(v));
+            if (!checker(subcategoriesIds, subcategoriesIdsInDB)) {
+                return Promise.reject(new Error('Subcategories don\'t belong to the category'));
+            }
+
+        })
+        )
 
     ,
 

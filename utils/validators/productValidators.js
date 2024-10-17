@@ -120,6 +120,7 @@ exports.createProductValidator = [
 
         })
         )
+    // delete duplicate subcategories from body
 
     ,
 

@@ -1,13 +1,17 @@
 const fs = require('fs');
-// require('colors');
-const dotenv = require('dotenv');
-const Product = require('../../models/productModel');
-const dbConnection = require('../../config/database');
 
-dotenv.config({ path: '../../config.env' });
+require('dotenv').config({ path: '../../.env' });
+
+// eslint-disable-next-line import/no-extraneous-dependencies
+require('colors');
+
+const Product = require('../../models/Product');
+const connectDB = require('../../config/mongoose');
+
+
 
 // connect to DB
-dbConnection();
+connectDB();
 
 // Read data
 const products = JSON.parse(fs.readFileSync('./products.json'));
@@ -21,7 +25,7 @@ const insertData = async () => {
         console.log('Data Inserted'.green.inverse);
         process.exit();
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
     }
 };
 

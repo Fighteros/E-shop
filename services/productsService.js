@@ -12,12 +12,35 @@ const ApiError = require('../utils/ApiError');
 // @route GET /api/v1/products
 // @access Public
 exports.getProducts = asyncHandler(async (req, res, next) => {
+
+    //1. Filter
+
+    const queryStringObj = { ...req.query };
+    const excludeFields = ["page", "sort", "limit", "fields"]
+
+    excludeFields.forEach(field => delete queryStringObj[field]);
+
+
+    // 2. Pagination
     // * 1 To convert it to number! (JavaScript!)
     const page = req.query.page * 1 || 1;
     const limit = req.query.limit * 1 || 5;
     const skip = (page - 1) * limit; // (2 - 1) * 5 = 5 skip first
 
-    const products = await Product.find({}).skip(skip).limit(limit).populate({ path: "category", select: "name -_id" });
+    // Build query 
+    const mongooseQuery = Product.find(queryStringObj)
+        // filter results to search
+        // .where('price').equals(req.query.price).where('ratingsAverage').equals(req.query.ratingsAverage)
+        .skip(skip)
+        .limit(limit)
+        .populate({ path: "category", select: "name -_id" });
+
+
+    // Execute query
+    const products = await mongooseQuery;
+
+
+
     return res.status(200).json({
         data:
         {

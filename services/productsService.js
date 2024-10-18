@@ -20,6 +20,13 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
 
     excludeFields.forEach(field => delete queryStringObj[field]);
 
+    // Apply filter using [gt|gte|le|lte]
+    // "{price: {$gte: 50}, ratingsAverage: {$gte: 4} }"
+    // { ratingsAverage: { gte: '4.0' }, price: { gte: '50' } }
+    let queryStr = JSON.stringify(queryStringObj);
+    queryStr = queryStr.replace(/\b(gte|gt|lte|le)\b/g, value => `$${value}`)
+
+
 
     // 2. Pagination
     // * 1 To convert it to number! (JavaScript!)
@@ -27,8 +34,10 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
     const limit = req.query.limit * 1 || 5;
     const skip = (page - 1) * limit; // (2 - 1) * 5 = 5 skip first
 
+
+
     // Build query 
-    const mongooseQuery = Product.find(queryStringObj)
+    const mongooseQuery = Product.find(JSON.parse(queryStr))
         // filter results to search
         // .where('price').equals(req.query.price).where('ratingsAverage').equals(req.query.ratingsAverage)
         .skip(skip)

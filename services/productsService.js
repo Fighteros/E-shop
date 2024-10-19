@@ -58,6 +58,13 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
     }
 
 
+    // 4- Fields limiting
+    if (req.query.fields) {
+        const limitBy = req.query.fields.split(',').join(' ');
+        mongooseQuery = mongooseQuery.select(limitBy);
+    }
+
+
     // Execute query
     const products = await mongooseQuery;
 

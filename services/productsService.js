@@ -52,6 +52,9 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
         const sortBy = req.query.sort.split(",").join(' ');
 
         mongooseQuery = mongooseQuery.sort(sortBy);
+    } else {
+        // new to old
+        mongooseQuery = mongooseQuery.sort("-createdAt")
     }
 
 

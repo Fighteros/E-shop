@@ -37,12 +37,22 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
 
 
     // Build query 
-    const mongooseQuery = Product.find(JSON.parse(queryStr))
+    let mongooseQuery = Product.find(JSON.parse(queryStr))
         // filter results to search
         // .where('price').equals(req.query.price).where('ratingsAverage').equals(req.query.ratingsAverage)
         .skip(skip)
         .limit(limit)
         .populate({ path: "category", select: "name -_id" });
+
+
+
+
+    // 3- Sorting 
+    if (req.query.sort) {
+        const sortBy = req.query.sort.split(",").join(' ');
+
+        mongooseQuery = mongooseQuery.sort(sortBy);
+    }
 
 
     // Execute query

@@ -63,6 +63,10 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
         const limitBy = req.query.fields.split(',').join(' ');
         mongooseQuery = mongooseQuery.select(limitBy);
     }
+    else {
+        mongooseQuery = mongooseQuery.select('-__v');
+    }
+
 
 
     // Execute query

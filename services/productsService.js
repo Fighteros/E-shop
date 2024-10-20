@@ -16,7 +16,7 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
     //1. Filter
 
     const queryStringObj = { ...req.query };
-    const excludeFields = ["page", "sort", "limit", "fields"]
+    const excludeFields = ["page", "sort", "limit", "fields", "keyword"]
 
     excludeFields.forEach(field => delete queryStringObj[field]);
 
@@ -65,6 +65,19 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
     }
     else {
         mongooseQuery = mongooseQuery.select('-__v');
+    }
+
+
+
+    // 5- Search 
+
+    if (req.query.keyword) {
+        const query = {};
+        query.$or = [
+            { title: { $regex: req.query.keyword, $options: "i" } },
+            { description: { $regex: req.query.keyword, $options: "i" } },
+        ];
+        mongooseQuery = mongooseQuery.find(query)
     }
 
 

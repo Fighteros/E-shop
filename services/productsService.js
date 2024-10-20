@@ -7,12 +7,38 @@ const Product = require('../models/Product');
 const ApiError = require('../utils/ApiError');
 
 
+const ApiFeatures = require('../utils/ApiFeatures');
+
+
+
 
 // @desc Get list of products
 // @route GET /api/v1/products
 // @access Public
 exports.getProducts = asyncHandler(async (req, res, next) => {
 
+    // BUILD QUERY 
+    const documentsCount = await Product.countDocuments();
+    const apiFeatures = new ApiFeatures(Product.find(), req.query)
+        .paginate(documentsCount)
+        .filter()
+        .search()
+        .sort()
+        .limitFields();
+
+
+    // Execute query
+    const { mongooseQuery, paginationResult } = apiFeatures
+    const products = await mongooseQuery;
+
+
+    return res.status(200).json({
+        results: products.length,
+        paginationResult,
+        data: products
+    });
+
+    /*
     //1. Filter
 
     const queryStringObj = { ...req.query };
@@ -28,14 +54,11 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
 
 
 
-    // 2. Pagination
-    // * 1 To convert it to number! (JavaScript!)
+    2. Pagination
+    * 1 To convert it to number! (JavaScript!)
     const page = req.query.page * 1 || 1;
     const limit = req.query.limit * 1 || 5;
     const skip = (page - 1) * limit; // (2 - 1) * 5 = 5 skip first
-
-
-
     // Build query 
     let mongooseQuery = Product.find(JSON.parse(queryStr))
         // filter results to search
@@ -47,7 +70,7 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
 
 
 
-    // 3- Sorting 
+    3- Sorting 
     if (req.query.sort) {
         const sortBy = req.query.sort.split(",").join(' ');
 
@@ -58,7 +81,7 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
     }
 
 
-    // 4- Fields limiting
+    4- Fields limiting
     if (req.query.fields) {
         const limitBy = req.query.fields.split(',').join(' ');
         mongooseQuery = mongooseQuery.select(limitBy);
@@ -69,7 +92,7 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
 
 
 
-    // 5- Search 
+    5- Search 
 
     if (req.query.keyword) {
         const query = {};
@@ -80,21 +103,7 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
         mongooseQuery = mongooseQuery.find(query)
     }
 
-
-
-    // Execute query
-    const products = await mongooseQuery;
-
-
-
-    return res.status(200).json({
-        data:
-        {
-            total_categories: products.length,
-            page,
-            data: products
-        }
-    });
+    */
 });
 
 

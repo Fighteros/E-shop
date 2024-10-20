@@ -1,0 +1,56 @@
+[{
+  "_id": {
+    "$oid": "66ff6b9092b6fdec83a79ff2"
+  },
+  "name": "Zara",
+  "slug": "zara",
+  "createdAt": {
+    "$date": "2024-10-04T04:14:08.902Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-04T04:14:08.902Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66ff6b9892b6fdec83a79ff4"
+  },
+  "name": "Adids",
+  "slug": "adids",
+  "createdAt": {
+    "$date": "2024-10-04T04:14:16.772Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-04T04:14:16.772Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66ff6b9b92b6fdec83a79ff6"
+  },
+  "name": "Adidas",
+  "slug": "adidas",
+  "createdAt": {
+    "$date": "2024-10-04T04:14:19.873Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-04T04:14:19.873Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66ff6ba192b6fdec83a79ff8"
+  },
+  "name": "Cotonil",
+  "slug": "cotonil",
+  "createdAt": {
+    "$date": "2024-10-04T04:14:25.001Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-04T04:14:25.001Z"
+  },
+  "__v": 0
+}]

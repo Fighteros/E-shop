@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler');
 const ApiError = require('../utils/ApiError');
 
 const SubCategory = require('../models/SubCategory');
+const ApiFeatures = require('../utils/ApiFeatures');
 
 
 
@@ -32,23 +33,24 @@ exports.createFilterObj = (req, res, next) => {
 // @route GET /api/v1/subCategories
 // @access Public
 exports.getSubCategories = asyncHandler(async (req, res, next) => {
-    // * 1 To convert it to number! (JavaScript!)
-    const page = req.query.page * 1 || 1;
-    const limit = req.query.limit * 1 || 5;
-    const skip = (page - 1) * limit; // (2 - 1) * 5 = 5 skip first
+    // BUILD QUERY 
+    const documentsCount = await SubCategory.countDocuments();
+    const apiFeatures = new ApiFeatures(SubCategory.find(), req.query)
+        .paginate(documentsCount)
+        .filter()
+        .search()
+        .sort()
+        .limitFields();
 
 
-    const subCategories = await SubCategory.find(req.filterObj)
-        .skip(skip)
-        .limit(limit);
+    // Execute query
+    const { mongooseQuery, paginationResult } = apiFeatures
+    const subCategories = await mongooseQuery;
 
     return res.status(200).json({
-        results:
-        {
-            total_subCategories: subCategories.length,
-            page,
-            data: subCategories
-        }
+        total_subCategories: subCategories.length,
+        paginationResult,
+        data: subCategories
     });
 });
 

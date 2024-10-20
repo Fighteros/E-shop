@@ -1,0 +1,98 @@
+[{
+  "_id": {
+    "$oid": "66e79fd91d83bcd671b40721"
+  },
+  "name": "printers",
+  "slug": "printers",
+  "createdAt": {
+    "$date": "2024-09-16T03:02:49.297Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-27T00:29:30.058Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66e7a0151d83bcd671b40732"
+  },
+  "name": "Mobile phones",
+  "slug": "mobile-phones",
+  "createdAt": {
+    "$date": "2024-09-16T03:03:49.413Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-16T03:03:49.413Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66e7a0231d83bcd671b40734"
+  },
+  "name": "Computers and laptops",
+  "slug": "computers-and-laptops",
+  "createdAt": {
+    "$date": "2024-09-16T03:04:03.227Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-16T03:04:03.227Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66e7a0271d83bcd671b40736"
+  },
+  "name": "Computers and PS",
+  "slug": "computers-and-ps",
+  "createdAt": {
+    "$date": "2024-09-16T03:04:07.729Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-16T03:04:07.729Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66e7a9ebe0b19024b0a9c059"
+  },
+  "name": "Clothes",
+  "slug": "clothes",
+  "createdAt": {
+    "$date": "2024-09-16T03:45:47.067Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-16T03:45:47.067Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66e7a9f2e0b19024b0a9c05b"
+  },
+  "name": "Watches",
+  "slug": "watches",
+  "createdAt": {
+    "$date": "2024-09-16T03:45:54.769Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-16T03:45:54.769Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66e7aa01e0b19024b0a9c05d"
+  },
+  "name": "Shoes",
+  "slug": "shoes",
+  "createdAt": {
+    "$date": "2024-09-16T03:46:09.425Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-16T03:46:09.425Z"
+  },
+  "__v": 0
+}]

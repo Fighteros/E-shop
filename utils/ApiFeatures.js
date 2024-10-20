@@ -52,15 +52,23 @@ class ApiFeatures {
     }
 
 
-    search() {
+    search(modelName) {
         if (this.queryStr.keyword) {
-            const query = {};
-            query.$or = [
-                { title: { $regex: this.queryStr.keyword, $options: "i" } },
-                { description: { $regex: this.queryStr.keyword, $options: "i" } },
-            ];
+            let query = {};
+
+            if (modelName === "Product") {
+
+                query.$or = [
+                    { title: { $regex: this.queryStr.keyword, $options: "i" } },
+                    { description: { $regex: this.queryStr.keyword, $options: "i" } },
+                ];
+            } else {
+                query = { name: { $regex: this.queryStr.keyword, $options: "i" } }
+            }
+
             this.mongooseQuery = this.mongooseQuery.find(query)
         }
+
 
         return this;
     }

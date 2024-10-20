@@ -1,0 +1,204 @@
+[{
+  "_id": {
+    "$oid": "66fb24439dd70e0bde399b46"
+  },
+  "name": "Asus",
+  "slug": "asus",
+  "category": {
+    "$oid": "66e7a0231d83bcd671b40734"
+  },
+  "createdAt": {
+    "$date": "2024-09-30T22:20:51.717Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T22:20:51.717Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66fb24499dd70e0bde399b48"
+  },
+  "name": "AOC",
+  "slug": "aoc",
+  "category": {
+    "$oid": "66e7a0231d83bcd671b40734"
+  },
+  "createdAt": {
+    "$date": "2024-09-30T22:20:57.795Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T22:20:57.795Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66fb24509dd70e0bde399b4a"
+  },
+  "name": "TpLink",
+  "slug": "tplink",
+  "category": {
+    "$oid": "66e7a0231d83bcd671b40734"
+  },
+  "createdAt": {
+    "$date": "2024-09-30T22:21:04.389Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T22:21:04.389Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66fb24569dd70e0bde399b4c"
+  },
+  "name": "Hawui",
+  "slug": "hawui",
+  "category": {
+    "$oid": "66e7a0231d83bcd671b40734"
+  },
+  "createdAt": {
+    "$date": "2024-09-30T22:21:10.852Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T22:21:10.852Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66fb24629dd70e0bde399b4e"
+  },
+  "name": "Gamdias",
+  "slug": "gamdias",
+  "category": {
+    "$oid": "66e7a0231d83bcd671b40734"
+  },
+  "createdAt": {
+    "$date": "2024-09-30T22:21:22.137Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T22:21:22.137Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66fb24699dd70e0bde399b50"
+  },
+  "name": "RcoK",
+  "slug": "rcok",
+  "category": {
+    "$oid": "66e7a0231d83bcd671b40734"
+  },
+  "createdAt": {
+    "$date": "2024-09-30T22:21:29.474Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T22:21:29.474Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66fb24719dd70e0bde399b52"
+  },
+  "name": "iMac",
+  "slug": "imac",
+  "category": {
+    "$oid": "66e7a0231d83bcd671b40734"
+  },
+  "createdAt": {
+    "$date": "2024-09-30T22:21:37.109Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T22:21:37.109Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66fc4d4ae3670b83a8f4032c"
+  },
+  "name": "iMac pro",
+  "slug": "imac-pro",
+  "category": {
+    "$oid": "66e7a0231d83bcd671b40734"
+  },
+  "createdAt": {
+    "$date": "2024-10-01T19:28:10.922Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-01T19:30:00.439Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66fdbf0cc425882b861eee4e"
+  },
+  "name": "Keyocera",
+  "slug": "keyocera",
+  "category": {
+    "$oid": "66e79fd91d83bcd671b40721"
+  },
+  "createdAt": {
+    "$date": "2024-10-02T21:45:48.380Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-02T21:45:48.380Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66fdbf10c425882b861eee50"
+  },
+  "name": "HP",
+  "slug": "hp",
+  "category": {
+    "$oid": "66e79fd91d83bcd671b40721"
+  },
+  "createdAt": {
+    "$date": "2024-10-02T21:45:52.430Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-02T21:45:52.430Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66fdbf14c425882b861eee52"
+  },
+  "name": "Canon",
+  "slug": "canon",
+  "category": {
+    "$oid": "66e79fd91d83bcd671b40721"
+  },
+  "createdAt": {
+    "$date": "2024-10-02T21:45:56.578Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-02T21:45:56.578Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66fdc3a0027b0ee39f060bef"
+  },
+  "name": "ALPS",
+  "slug": "alps",
+  "category": {
+    "$oid": "66e79fd91d83bcd671b40721"
+  },
+  "createdAt": {
+    "$date": "2024-10-02T22:05:20.807Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-02T22:05:20.807Z"
+  },
+  "__v": 0
+}]

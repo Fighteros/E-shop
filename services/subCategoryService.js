@@ -128,17 +128,3 @@ exports.updateSubCategory = asyncHandler(async (req, res, next) => {
 // @route       Delete /api/v1/subcategories/:id
 // @access      Private
 exports.deleteSubCategory = factory.deleteOne(SubCategory);
-// exports.deleteSubCategory = asyncHandler(async (req, res, next) => {
-//     const { id } = req.params;
-
-//     const subCategory = await SubCategory.findByIdAndDelete(id);
-
-//     if (!subCategory) {
-//         return next(
-//             new ApiError(`There's no subcategory for this id ${id}`, 404)
-//         );
-//     }
-
-//     res.status(204).end();
-// });
-

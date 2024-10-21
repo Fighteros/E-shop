@@ -104,17 +104,3 @@ exports.updateBrand = asyncHandler(async (req, res, next) => {
 
 exports.deleteBrand = factory.deleteOne(Brand);
 
-// exports.deleteBrand = asyncHandler(async (req, res, next) => {
-//     const { id } = req.params;
-//     const brand = await Brand.findByIdAndDelete(id);
-
-//     if (!brand) {
-//         return next(
-//             new ApiError(`There's no brand for this id ${id}`, 404)
-//         )
-//     }
-
-//     res.status(204).end();
-// });
-
-

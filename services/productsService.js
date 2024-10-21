@@ -174,17 +174,4 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
 // @access Private
 exports.deleteProduct = factory.deleteOne(Product);
 
-// exports.deleteProduct = asyncHandler(async (req, res, next) => {
-//     const { id } = req.params;
-//     const product = await Product.findByIdAndDelete(id);
-
-//     if (!product) {
-//         return next(
-//             new ApiError(`There's no product for this id ${id}`, 404)
-//         )
-//     }
-
-//     res.status(204).end();
-// });
-
 

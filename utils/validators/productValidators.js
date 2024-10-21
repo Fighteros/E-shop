@@ -166,12 +166,7 @@ exports.updateProductValidator = [
         .isMongoId()
         .withMessage('Invalid product id format'),
     check('title')
-        .notEmpty()
-        .withMessage('Product title is required')
-        .isLength({ min: 3 })
-        .withMessage('Too short product title')
-        .isLength({ max: 32 })
-        .withMessage('Too long product title')
+        .optional()
         .custom((val, { req }) => {
             req.body.slug = slugify(val);
             return true;

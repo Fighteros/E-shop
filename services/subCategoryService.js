@@ -4,6 +4,7 @@ const ApiError = require('../utils/ApiError');
 
 const SubCategory = require('../models/SubCategory');
 const ApiFeatures = require('../utils/ApiFeatures');
+const factory = require('./handlersFactory')
 
 
 
@@ -75,9 +76,6 @@ exports.getSubCategory = asyncHandler(async (req, res, next) => {
 
 
 
-
-
-
 // @desc        Create SubCategory 
 // @route       POST /api/v1/subCategories
 // @access      Private
@@ -129,18 +127,18 @@ exports.updateSubCategory = asyncHandler(async (req, res, next) => {
 // @desc        Delete SubCategory 
 // @route       Delete /api/v1/subcategories/:id
 // @access      Private
+exports.deleteSubCategory = factory.deleteOne(SubCategory);
+// exports.deleteSubCategory = asyncHandler(async (req, res, next) => {
+//     const { id } = req.params;
 
-exports.deleteSubCategory = asyncHandler(async (req, res, next) => {
-    const { id } = req.params;
+//     const subCategory = await SubCategory.findByIdAndDelete(id);
 
-    const subCategory = await SubCategory.findByIdAndDelete(id);
+//     if (!subCategory) {
+//         return next(
+//             new ApiError(`There's no subcategory for this id ${id}`, 404)
+//         );
+//     }
 
-    if (!subCategory) {
-        return next(
-            new ApiError(`There's no subcategory for this id ${id}`, 404)
-        );
-    }
-
-    res.status(204).end();
-});
+//     res.status(204).end();
+// });
 

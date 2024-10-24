@@ -82,15 +82,7 @@ exports.getSubCategory = asyncHandler(async (req, res, next) => {
 
 // @Known bug is no logic to verify that category id belongs to a real category
 // so the user can add up any valid mongo id but does it matter when creating ?
-exports.createSubCategory = asyncHandler(async (req, res) => {
-    const { name, category } = req.body;
-    const subCategory = await SubCategory.create({
-        name: name,
-        slug: slugify(name),
-        category
-    });
-    res.status(201).json({ data: subCategory })
-});
+exports.createSubCategory = factory.createOne(SubCategory);
 
 
 

@@ -1,6 +1,6 @@
 const { check } = require('express-validator');
-const validatorMiddleware = require('../../middlewares/validatorMiddleware');
 const { default: slugify } = require('slugify');
+const validatorMiddleware = require('../../middlewares/validatorMiddleware');
 
 
 exports.getCategoryValidator = [
@@ -18,6 +18,10 @@ exports.createCategoryValidator = [
         .withMessage('Too short category name')
         .isLength({ max: 32 })
         .withMessage('Too long category name')
+        .custom((val, { req }) => {
+            req.body.slug = slugify(val)
+            return true;
+        })
     ,
     validatorMiddleware
 ]

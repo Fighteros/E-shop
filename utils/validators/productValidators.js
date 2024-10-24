@@ -14,6 +14,10 @@ exports.createProductValidator = [
         .withMessage('Title cannot be empty')
         .isLength({ max: 100 })
         .withMessage('Too long product title')
+        .custom((val, { req }) => {
+            req.body.slug = slugify(val)
+            return true;
+        })
     ,
 
     check('description')
